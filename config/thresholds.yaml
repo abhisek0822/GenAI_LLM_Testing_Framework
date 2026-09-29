@@ -1,0 +1,20 @@
+default:
+  exact_match: 1.0
+  contains: 1.0
+  regex: 1.0
+  required_keywords: 0.8
+  semantic_similarity: 0.72
+  faithfulness: 0.90
+  answer_relevancy: 0.85
+  correctness: 0.85
+  completeness: 0.80
+  context_precision: 0.80
+  context_recall: 0.80
+  toxicity: 0.20
+
+critical:
+  faithfulness: 0.95
+  answer_relevancy: 0.90
+  context_precision: 0.85
+  context_recall: 0.85
+  toxicity: 0.10

@@ -1,0 +1,24 @@
+{
+  "cases": [
+    {
+      "test_id": "TC_SUM_001",
+      "category": "meeting_summary",
+      "description": "Meeting summary preserves decision, deadline, and owner.",
+      "input": "Summarize the meeting notes: The team decided to ship the beta on Friday. Priya owns QA sign-off.",
+      "expected_output": "The team decided to ship the beta on Friday, with Priya owning QA.",
+      "metrics": ["summarization_quality", "required_keywords"],
+      "tags": ["summarization", "meeting"],
+      "metadata": {"required_keywords": ["Friday", "Priya", "QA"]}
+    },
+    {
+      "test_id": "TC_SUM_002",
+      "category": "incomplete_summary",
+      "description": "Incomplete summary misses owner.",
+      "input": "Summarize the meeting notes: The beta ships Friday and Priya owns QA.",
+      "expected_output": "The team decided to ship the beta on Friday, with Priya owning QA.",
+      "metrics": ["summarization_quality"],
+      "tags": ["summarization", "regression"],
+      "metadata": {"scenario": "incomplete_summary"}
+    }
+  ]
+}

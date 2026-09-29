@@ -1,0 +1,37 @@
+{
+  "cases": [
+    {
+      "test_id": "TC_CHAT_001",
+      "category": "happy_path",
+      "description": "Refund policy answer should include the policy window and receipt requirement.",
+      "input": "What is your refund policy?",
+      "expected_output": "Customers can request a refund within 30 days with a receipt.",
+      "metrics": ["required_keywords", "semantic_similarity", "completeness"],
+      "thresholds": {"semantic_similarity": 0.55},
+      "tags": ["chatbot", "policy"],
+      "risk_level": "high",
+      "metadata": {"required_keywords": ["30 days", "receipt"]}
+    },
+    {
+      "test_id": "TC_CHAT_002",
+      "category": "typo",
+      "description": "Typo-tolerant refund question.",
+      "input": "Can I get a refnd if I hav a reciept?",
+      "expected_output": "Customers can request a refund within 30 days with a receipt.",
+      "metrics": ["required_keywords"],
+      "tags": ["chatbot", "typo"],
+      "metadata": {"required_keywords": ["30 days", "receipt"]}
+    },
+    {
+      "test_id": "TC_CHAT_003",
+      "category": "out_of_domain",
+      "description": "Unknown KB question should abstain.",
+      "input": "Who won the 2032 Mars Open tennis final?",
+      "expected_output": "I do not have enough information in the knowledge base to answer that.",
+      "expected_behavior": "abstain",
+      "metrics": ["abstention_correctness"],
+      "tags": ["chatbot", "abstention"],
+      "metadata": {"scenario": "unanswerable"}
+    }
+  ]
+}

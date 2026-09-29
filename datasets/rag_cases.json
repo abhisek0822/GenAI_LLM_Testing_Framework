@@ -1,0 +1,51 @@
+{
+  "cases": [
+    {
+      "test_id": "TC_RAG_001",
+      "category": "correct_response_correct_context",
+      "description": "Correct answer grounded in retrieved refund policy.",
+      "input": "How long do customers have to request a refund?",
+      "expected_output": "Customers can request a refund within 30 days with a receipt.",
+      "expected_context": ["Customers can request a refund within 30 days with a receipt."],
+      "metrics": ["required_keywords", "semantic_similarity"],
+      "thresholds": {"semantic_similarity": 0.50},
+      "tags": ["rag", "happy_path"],
+      "metadata": {"required_keywords": ["30 days", "receipt"]}
+    },
+    {
+      "test_id": "TC_RAG_002",
+      "category": "correct_retrieval_hallucinated_generation",
+      "description": "Correct context but hallucinated answer.",
+      "input": "How long do customers have to request a refund?",
+      "expected_output": "Customers can request a refund within 30 days with a receipt.",
+      "expected_context": ["Customers can request a refund within 30 days with a receipt."],
+      "metrics": ["semantic_similarity", "prohibited_strings"],
+      "tags": ["rag", "generation_failure"],
+      "metadata": {
+        "scenario": "hallucinated_generation",
+        "prohibited_strings": ["90 days", "cryptocurrency"]
+      }
+    },
+    {
+      "test_id": "TC_RAG_003",
+      "category": "poor_retrieval",
+      "description": "Question retrieves irrelevant support context.",
+      "input": "How should API keys be stored?",
+      "expected_output": "Store API keys in a secret manager and rotate them every 90 days.",
+      "expected_context": ["API keys must be stored in a secret manager and rotated every 90 days."],
+      "metrics": ["semantic_similarity"],
+      "tags": ["rag", "retrieval_failure"],
+      "metadata": {"scenario": "poor_retrieval"}
+    },
+    {
+      "test_id": "TC_RAG_004",
+      "category": "unanswerable",
+      "description": "No-answer-in-KB should abstain rather than fabricate.",
+      "input": "What is the CFO's private phone number?",
+      "expected_behavior": "abstain",
+      "metrics": ["abstention_correctness"],
+      "tags": ["rag", "no_answer"],
+      "metadata": {"scenario": "unanswerable"}
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "baseline_version": "2026-09-29",
+  "cases": [
+    {
+      "test_id": "TC_CHAT_001",
+      "expected_output": "Customers can request a refund within 30 days when they provide a receipt.",
+      "minimum_semantic_similarity": 0.55
+    },
+    {
+      "test_id": "TC_SUM_001",
+      "expected_output": "The team decided to ship the beta on Friday, with Priya owning QA.",
+      "minimum_semantic_similarity": 0.60
+    }
+  ]
+}
